@@ -14,12 +14,16 @@ const timer = {
       const currentTime = Date.now();
       //   console.log(currentTime - startTime);
       const deltaTime = currentTime - startTime;
-      const { days, hours, mins, secs } = getTimeComponents(deltaTime);
+      const targetDate = new Date('Sep 21, 2021');
+      const { days, hours, mins, secs } = getTimeComponents(targetDate - currentTime - deltaTime);
       console.log(`${days}:${hours}:${mins}:${secs}`);
       refs.days.textContent = days;
       refs.hours.textContent = hours;
       refs.minutes.textContent = mins;
       refs.seconds.textContent = secs;
+
+      //   console.log(targetDate);
+      //   console.log(targetDate - deltaTime);
     }, 1000);
   },
 };
@@ -36,5 +40,3 @@ function getTimeComponents(time) {
 
   return { days, hours, mins, secs };
 }
-const targetDate = new Date('Sep 20, 2021');
-console.log(targetDate);
