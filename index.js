@@ -4,8 +4,12 @@ const refs = {
   minutes: document.querySelector('[data-value = "mins"]'),
   seconds: document.querySelector('[data-value = "secs"]'),
 };
-console.log(refs.seconds);
-const timer = {
+
+class CountdownTimer {
+  constructor(selector, targetDate) {
+    this.selector = selector;
+    this.targetDate = targetDate;
+  }
   start() {
     const startTime = Date.now();
     console.log(startTime);
@@ -14,7 +18,7 @@ const timer = {
       const currentTime = Date.now();
       //   console.log(currentTime - startTime);
       const deltaTime = currentTime - startTime;
-      const targetDate = new Date('Sep 21, 2021');
+      const targetDate = this.selector.targetDate;
       const { days, hours, mins, secs } = getTimeComponents(targetDate - currentTime - deltaTime);
       console.log(`${days}:${hours}:${mins}:${secs}`);
       refs.days.textContent = days;
@@ -25,8 +29,12 @@ const timer = {
       //   console.log(targetDate);
       //   console.log(targetDate - deltaTime);
     }, 1000);
-  },
-};
+  }
+}
+const timer = new CountdownTimer({
+  selector: '#timer-1',
+  targetDate: new Date('Sep 20, 2021'),
+});
 timer.start();
 function pad(value) {
   return String(value).padStart(2, '0');
@@ -40,3 +48,4 @@ function getTimeComponents(time) {
 
   return { days, hours, mins, secs };
 }
+console.log(timer.targetDate);
